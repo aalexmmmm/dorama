@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-dy*k#mn2^+je16y(ng8tphho7i^at30=d=a*dh@=d+@#fpbme$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True  # В режиме отладки True, в боевом режиме False
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'doramas.apps.DoramasConfig'
+    'doramas.apps.DoramasConfig'  # Приложение Doramas
 ]
 
 MIDDLEWARE = [
@@ -117,5 +117,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Настройка для поля ImageField модели Doramas
+MEDIA_URL = '/media/'  # Настройка для поля ImageField модели Doramas

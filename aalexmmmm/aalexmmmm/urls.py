@@ -27,9 +27,9 @@ urlpatterns = [
     path('', include('doramas.urls')),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG:  # Настройка для поля ImageField модели Doramas
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = pageNotFound
+handler404 = pageNotFound  # Обработка исключений
 
 

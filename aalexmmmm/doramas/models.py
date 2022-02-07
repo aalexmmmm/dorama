@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Doramas(models.Model):
+class Doramas(models.Model):  # Модель для базы данных из списка дорам
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
