@@ -1,11 +1,14 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 
+from .models import *
+
 
 menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
 
 def index(request):  # Функция представления для главной страницы.
-    return render(request, 'doramas/index.html', {'menu': menu, 'title': 'Главная страница'})
+    posts = Doramas.objects.all()
+    return render(request, 'doramas/index.html', {'posts': posts, 'menu': menu, 'title': 'Главная страница'})
 
 def about(request):  # Функция представления для страницы О сайте.
     return render(request, 'doramas/about.html', {'menu': menu, 'title': 'О сайте'})
