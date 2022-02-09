@@ -1,14 +1,19 @@
 {% extends 'doramas/base.html' %}
  
 {% block content %}
-<h1>{{title}}</h1>
-<ul>
-         {% for p in posts %}
-         <li>
-                   <h2>{{p.title}}</h2>
-                   {{p.content}}</p>
-                   <hr>
-         </li>
-         {% endfor %}
-</ul>
+
+    {% for p in posts %}
+        <article>
+                <header>
+                    <img src="images/img1.jpg" alt="Картинка">
+                    <p>Nikolay Kuznetsov 14.05.2020</p>
+                </header>
+                <h2>{{p.title}}</h2>
+                <p>{{p.content}}</p>
+                <a href="">Continue Reading</a>
+        </article>
+    {% endfor %}
+
 {% endblock %}
+
+
