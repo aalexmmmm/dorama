@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from aalexmmmm import settings
-from doramas.views import index, pageNotFound
+from doramas.views import index, page_not_found
 from django.urls import path, include
 
 
@@ -30,6 +30,6 @@ urlpatterns = [
 if settings.DEBUG:  # Настройка для поля ImageField модели Doramas
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = pageNotFound  # Обработка исключений
+handler404 = page_not_found  # Обработка исключений
 
 

@@ -4,11 +4,11 @@
 	<!-- Шапка сайта - начало -->
 	<header>
 		<div class="center-block-main">
-			<a href="#"><img class="logo" src="images/logo.jpg" alt="Логотип"></a>
+			<a href="{% url 'home' %}"><img class="logo" src="images/logo.jpg" alt="Логотип"></a>
 			<nav>
 				<ul>
 					{% for m in menu %}
-                    <li><a href="#">{{m}}</a></li>
+                    <li><a href="{% url m.url_name %}">{{m.title}}</a></li>
                     {% endfor %}
 				</ul>
 			</nav>

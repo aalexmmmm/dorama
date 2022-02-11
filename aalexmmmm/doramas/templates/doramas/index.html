@@ -9,8 +9,8 @@
                     <p>Nikolay Kuznetsov 14.05.2020</p>
                 </header>
                 <h2>{{p.title}}</h2>
-                <p>{{p.content}}</p>
-                <a href="">Continue Reading</a>
+                <p>{{p.content|linebreaks|truncatewords:50}}</p>
+                <a href="{{ p.get_absolute_url }}">Подробнее</a>
         </article>
     {% endfor %}
 

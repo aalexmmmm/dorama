@@ -32,12 +32,19 @@
 				</form>
 			</section>
 			<section>
-				<h3>Categories</h3>
+				{% if cat_selected == 0 %}
+                   <h3 class="selected">Все категории</h3>
+				{% else %}
+                   <h3><a href="{% url 'home' %}">Все категории</a></h3>
+				{% endif %}
 				<ul class="categories">
-					<li><a href="#">Weekend</a></li>
-					<li><a href="#">Nature</a></li>
-					<li><a href="#">Work</a></li>
-					<li><a href="#">Holiday</a></li>
+					{% for c in cats %}
+         				{% if c.pk == cat_selected %}
+                   			<li class="selected">{{c.name}}</li>
+         				{% else %}
+                   			<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+         				{% endif %}
+					{% endfor %}
 				</ul>
 			</section>
 			<section>
@@ -48,7 +55,7 @@
 				</form>
 			</section>
 			<div class="banner">
-				<a href=""><img src="images/banner.jpg" alt="Курс такой то"></a>
+				<a href=""><img src="images/banner.jpg" alt="Курс такой-то"></a>
 			</div>
 		</aside>
 		<!-- Сайдбар - конец -->
