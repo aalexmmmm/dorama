@@ -5,9 +5,12 @@
     {% for p in posts %}
         <article>
                 <header>
-                    <img src="images/img1.jpg" alt="Картинка">
-                    <p>Nikolay Kuznetsov 14.05.2020</p>
+                    {% if p.photo %}
+                        <img src="{{p.photo.url}}" alt="Картинка">
+                    {% endif %}
+                    <p class="first">Категория: {{p.cat}}</p>
                 </header>
+
                 <h2>{{p.title}}</h2>
                 <p>{{p.content|linebreaks|truncatewords:50}}</p>
                 <a href="{{ p.get_absolute_url }}">Подробнее</a>

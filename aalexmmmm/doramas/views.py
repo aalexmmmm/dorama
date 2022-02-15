@@ -13,11 +13,9 @@ menu = [{'title': "О сайте", 'url_name': 'about'},  # словарь дл�
 
 def index(request):  # Функция представления для главной страницы.
     posts = Doramas.objects.all()
-    cats = Category.objects.all()
 
     context = {
         'posts': posts,
-        'cats': cats,
         'menu': menu,
         'title': 'Главная страница',
         'cat_selected': 0,
@@ -48,14 +46,12 @@ def show_post(request, post_id):  # Функция для страниц с ка
 
 def show_category(request, cat_id):
     posts = Doramas.objects.filter(cat_id=cat_id)
+
     if len(posts) == 0:
         raise Http404()
 
-    cats = Category.objects.all()
-
     context = {
         'posts': posts,
-        'cats': cats,
         'menu': menu,
         'title': 'Главная страница',
         'cat_selected': cat_id,
