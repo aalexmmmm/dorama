@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
+from .forms import *
 from .models import *
 
 
@@ -29,7 +30,16 @@ def about(request):  # Функция представления для стра
 
 
 def addpage(request):
-    return HttpResponse("Добавление статьи")
+    if request.method == 'POST':
+        form = AddPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            # print(form.cleaned_data)
+            form.save()
+            return redirect('home')
+
+    else:
+        form = AddPostForm()
+    return render(request, 'doramas/addpage.html', {'menu': menu, 'title': 'Добавление статьи', 'form': form})
 
 
 def contact(request):
@@ -40,12 +50,22 @@ def login(request):
     return HttpResponse("Авторизация")
 
 
-def show_post(request, post_id):  # Функция для страниц с каждым из постов
-    return HttpResponse(f"Отображение статьи с id = {post_id}")
+def show_post(request, post_slug):  # Функция для страниц с каждым из постов
+    post = get_object_or_404(Doramas, slug=post_slug)
+
+    context = {
+        'post': post,
+        'menu': menu,
+        'title': post.title,
+        'cat_selected': post.cat_id,
+    }
+
+    return render(request, 'doramas/post.html', context=context)
 
 
-def show_category(request, cat_id):
-    posts = Doramas.objects.filter(cat_id=cat_id)
+def show_category(request, cat_slug):
+    cat = get_object_or_404(Category, slug=cat_slug)
+    posts = Doramas.objects.filter(cat_id=cat.id)
 
     if len(posts) == 0:
         raise Http404()
@@ -53,8 +73,8 @@ def show_category(request, cat_id):
     context = {
         'posts': posts,
         'menu': menu,
-        'title': 'Главная страница',
-        'cat_selected': cat_id,
+        'title': cat.name,
+        'cat_selected': cat.id,
     }
 
     return render(request, 'doramas/index.html', context=context)
