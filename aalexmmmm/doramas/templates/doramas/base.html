@@ -21,6 +21,21 @@
 		<div class="content">
 			{% block content %}
 			{% endblock %}
+			{% if page_obj.has_other_pages %}
+			<nav class="list-pages">
+				<ul>
+					{% for p in paginator.page_range %}
+					{% if page_obj.number == p %}
+					<li class="page-num page-num-selected">{{ p }}</li>
+                    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+					<li class="page-num">
+						<a href="?page={{ p }}">{{ p }}</a>
+					</li>
+					{% endif %}
+					{% endfor %}
+				</ul>
+			</nav>
+			{% endif %}
 		</div>
 		<!-- Статьи - конец -->
 
@@ -39,7 +54,15 @@
                    <h3><a href="{% url 'home' %}">Все категории</a></h3>
 				{% endif %}
 				<ul class="categories">
-					{% show_categories cat_selected=cat_selected %}
+					{% for c in cats %}
+					{% if c.doramas__count > 0 %}
+						 {% if c.pk == cat_selected %}
+							   <li class="selected">{{c.name}}</li>
+						 {% else %}
+							   <li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+						 {% endif %}
+					{% endif %}
+					{% endfor %}
 				</ul>
 			</section>
 			<section>
@@ -59,8 +82,12 @@
 
 		<!-- Постраничная навигация - начало -->
 		<div class="pager">
-			<span>&larr; <a href="#">Previous</a></span>
-			<span><a href="#">Next</a> &rarr;</span>
+			{% if page_obj.has_previous %}
+			<span>&larr; <a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+			{% endif %}
+			{% if page_obj.has_next %}
+			<span><a href="?page={{ page_obj.next_page_number }}">Next</a> &rarr;</span>
+			{% endif %}
 		</div>
 		<!-- Постраничная навигация - конец -->
 

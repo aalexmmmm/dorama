@@ -21,7 +21,7 @@ class Doramas(models.Model):  # Модель для базы данных из �
     class Meta:
         verbose_name = 'Дорамы'
         verbose_name_plural = 'Дорамы'
-        ordering = ['time_create', 'title']
+        ordering = ['id']
 
 
 class Category(models.Model):
